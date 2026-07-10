@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+body {
+    color: white;
+}
+
+canvas {
+    position: fixed;
+    inset: 0;
+    display: block;
+    z-index: 0;
+}
+
+#intro {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, rgba(92, 105, 255, 0.18), rgba(0, 0, 0, 0.74));
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.intro-content {
+    text-align: center;
+    color: white;
+    max-width: 860px;
+    padding: 24px;
+}
+
+.title {
+    font-size: 84px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-shadow: 0 0 24px rgba(255, 255, 255, 0.8), 0 0 70px rgba(120, 168, 255, 0.35);
+}
+
+.subtitle {
+    font-size: 26px;
+    line-height: 1.7;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+#startJourney {
+    margin-top: 50px;
+    padding: 18px 46px;
+    border: none;
+    border-radius: 999px;
+    font-size: 20px;
+    font-weight: 600;
+    background: linear-gradient(90deg, #ffffff, #7fb3ff);
+    color: #050816;
+    cursor: pointer;
+    transition: 0.35s;
+    box-shadow: 0 0 30px rgba(127, 179, 255, 0.3);
+}
+
+#startJourney:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.55);
+}
+
+.story-card-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.42);
+    backdrop-filter: blur(10px);
+    z-index: 80;
+}
+
+.story-card-overlay.hidden {
+    display: none;
+}
+
+.story-card {
+    width: min(92vw, 700px);
+    padding: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 28px;
+    background: rgba(5, 8, 22, 0.82);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.14);
+}
+
+.story-card__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+}
+
+.story-card__title {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.story-card__text {
+    font-size: 1.02rem;
+    line-height: 1.7;
+    opacity: 0.88;
+    margin-bottom: 18px;
+}
+
+.story-card__media {
+    margin-bottom: 18px;
+}
+
+.story-media {
+    min-height: 180px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    font-size: 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.story-card__button {
+    border: none;
+    border-radius: 999px;
+    padding: 12px 22px;
+    font-size: 0.95rem;
+    background: #fff;
+    color: #050816;
+    cursor: pointer;
+}
+
+.memory-points {
+    position: fixed;
+    inset: auto 24px 24px auto;
+    display: flex;
+    gap: 12px;
+    z-index: 90;
+}
+
+.memory-point {
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(5, 8, 22, 0.65);
+    color: #fff;
+    cursor: pointer;
+    animation-delay: var(--delay);
+}
+
+.celebration {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle, rgba(255, 96, 188, 0.22), rgba(0, 0, 0, 0.88));
+    z-index: 120;
+    text-align: center;
+    pointer-events: none;
+}
+
+.celebration h2 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    letter-spacing: 0.04em;
+    text-shadow: 0 0 24px rgba(255, 255, 255, 0.3);
+}
+
+
+/* Floating action buttons for explore / continue */
+
+.explore-btn,
+.continue-btn {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 40px;
+    z-index: 110;
+    padding: 14px 28px;
+    border-radius: 999px;
+    border: none;
+    font-size: 1.05rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #7fb3ff, #b78bff);
+    color: #041022;
+    box-shadow: 0 10px 40px rgba(127, 179, 255, 0.18);
+    cursor: pointer;
+}
+
+.continue-btn {
+    background: linear-gradient(90deg, #ffd27a, #ff8fb7);
+}
+
+.explore-btn,
+.continue-btn {
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.explore-btn:hover,
+.continue-btn:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 14px 50px rgba(0, 0, 0, 0.25);
+}
+
+.planet-label {
+    position: fixed;
+    transform: translate3d(-9999px, -9999px, 0);
+    z-index: 200;
+    pointer-events: auto;
+    transition: transform 0.12s linear, opacity 0.2s ease;
+}
+
+.planet-label__bg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 8px;
+    filter: blur(0.6px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.planet-label__text {
+    position: relative;
+    display: inline-block;
+    padding: 8px 12px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+
+/* ensure label sizing */
+
+.planet-label {
+    padding: 4px 6px;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 48px;
+    }
+    .subtitle {
+        font-size: 18px;
+    }
+    #startJourney {
+        font-size: 18px;
+        padding: 16px 34px;
+    }
+    .story-card {
+        padding: 22px;
+    }
+    .memory-points {
+        inset: auto 12px 12px 12px;
+        flex-wrap: wrap;
+    }
+}
+
+.music-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    z-index: 99999;
+    transition: .35s;
+}
+
+.music-button:hover {
+    transform: scale(1.08);
+    background: rgba(255, 255, 255, .16);
+    border-color: rgba(255, 255, 255, .35);
+    box-shadow: 0 0 18px rgba(255, 255, 255, .18);
+}
+
+.music-button svg {
+    width: 23px;
+    height: 23px;
+    stroke-width: 2;
+}
