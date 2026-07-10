@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
 
-const music = new Audio("/audio/music.mp3");
+const music = new Audio(`${import.meta.env.BASE_URL}audio/music.mp3`);
 
 music.preload = "auto";
 music.loop = true;
