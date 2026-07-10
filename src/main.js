@@ -237,7 +237,7 @@ function setCameraTo(target) {
 
 function showStory(index) {
     const entry = story[index] || { title: 'Путешествие', text: 'Продолжим нашу историю.', color: '#6f8cff' };
-    const planetName = planets[index]?.userData?.name || `Планета ${index + 1}`;
+    const planetName = planets[index] ?.userData ?.name || `Планета ${index + 1}`;
     const imgSize = (index === 0 || index === 3) ? '45%' : '60%';
     const imageHtml = entry.image ?
         `<img src="${entry.image}" alt="${entry.title}" style="max-width:${imgSize}; border-radius:12px; display:block; width:${imgSize}; height:auto; margin:0 auto;" />` :
@@ -394,7 +394,8 @@ function removeContinueButton() {
 
 function showStoryCardFor(index) {
     const entry = story[index] || { title: 'Путешествие', text: 'Продолжим нашу историю.', color: '#6f8cff' };
-    const planetName = planets[index]?.userData?.name || `Планета ${index + 1}`;
+  console.log("IMAGE:", entry.image);
+    const planetName = planets[index] ?.userData ?.name || `Планета ${index + 1}`;
     const imgSize = (index === 0 || index === 3) ? '45%' : '60%';
     const imageHtml = entry.image ?
         `<img src="${entry.image}" alt="${entry.title}" style="max-width:${imgSize}; border-radius:12px; display:block; width:${imgSize}; height:auto; margin:0 auto;" />` :
